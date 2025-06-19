@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This file is part of the ProVANT simulator project.
+Licensed under the terms of the MIT open source license. More details at
+https://github.com/Guiraffo/ProVANT-Simulator/blob/master/LICENSE.md
+-->
+<package format="2">
+	<name>vant2load_franklin</name>
+	<version>1.0.0</version>
+	<description>
+		<p>The vant2load_franklin package provides a control 
+	strategy for the uav2_load model</p>
+	</description>
+
+	<maintainer email="jeduardo@ufmg.br">Júnio Eduardo de Morais Aquino</maintainer>
+
+	<license>MIT</license>
+
+	<url type="website">http://provant.eng.ufmg.br/provantsimulator</url>
+	<url type="repository">https://github.com/Guiraffo/ProVANT-Simulator.git</url>
+	<url type="bugtracker">https://github.com/Guiraffo/ProVANT-Simulator/issues</url>
+
+	<author email="brennersr7@ufmg.br">Brenner S. Rego</author>
+
+	<buildtool_depend>catkin</buildtool_depend>
+
+	<build_depend>roscpp</build_depend>
+	<build_depend>simulator_msgs</build_depend>
+	<build_depend>control_strategies_base</build_depend>
+
+	<exec_depend>roscpp</exec_depend>
+	<exec_depend>simulator_msgs</exec_depend>
+	<exec_depend>control_strategies_base</exec_depend>
+    
+    <export></export>
+</package>
