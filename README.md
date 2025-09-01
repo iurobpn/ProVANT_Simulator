@@ -219,7 +219,7 @@ cd $HOME/catkin_ws/src
 2. Clone the ProVANT Simulator git repository
 
 ```bash
-git clone https://github.com/Guiraffo/ProVANT-Simulator.git
+git clone https://github.com/ProVANT-Project/ProVANT_Simulator.git
 ```
 
 ### Install Conan
@@ -266,13 +266,13 @@ Go to the end of this file, and paste the following lines:
 
 ```bash
 # ProVANT Simulator Environment Variables
-export TILT_PROJECT=$HOME/catkin_ws/src/ProVANT-Simulator/
+export TILT_PROJECT=$HOME/catkin_ws/src/ProVANT_Simulator/
 export PROVANT_ROS=$HOME/catkin_ws/src/
 export DIR_ROS=$HOME/catkin_ws/
 export TILT_STRATEGIES=$HOME/catkin_ws/devel/lib/
-export TILT_MATLAB=$HOME/catkin_ws/src/ProVANT-Simulator/source/Structure/Matlab/
-export PROVANT_DATABASE=$HOME/catkin_ws/src/ProVANT-Simulator/source/Database/
-export GAZEBO_MODEL_PATH=$HOME/catkin_ws/src/ProVANT-Simulator/source/Database/models/
+export TILT_MATLAB=$HOME/catkin_ws/src/ProVANT_Simulator/source/Structure/Matlab/
+export PROVANT_DATABASE=$HOME/catkin_ws/src/ProVANT_Simulator/source/Database/
+export GAZEBO_MODEL_PATH=$HOME/catkin_ws/src/ProVANT_Simulator/source/Database/models/
 ```
 
 Save the file in gedit, and close your terminal.
@@ -304,7 +304,7 @@ To compile and install the GUI, please open a terminal and execute the following
 1. Open the ProVANT Simulator source folder
 
 ```bash
-cd $HOME/catkin_ws/src/ProVANT-Simulator/source
+cd $HOME/catkin_ws/src/ProVANT_Simulator/source
 ```
 
 2. Create a build folder for the GUI
@@ -334,7 +334,7 @@ make
 6. Install the GUI
 
 ```bash
-sudo ln -sf $HOME/catkin_ws/src/ProVANT-Simulator/source/build/GUI /usr/local/bin/provant_gui
+sudo ln -sf $HOME/catkin_ws/src/ProVANT_Simulator/source/build/GUI /usr/local/bin/provant_gui
 ```
 
 7. Check that the GUI is opening correctly
