@@ -6,7 +6,7 @@ cd cmake-3.23.5
 
 ./bootstrap --system-curl
 make -j$(nproc)
-make install
+sudo make install
 
 cd ..
 rm -rf cmake-3.23.5
