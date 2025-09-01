@@ -37,43 +37,13 @@ To do this, please open an ew terminal and execute the following steps
 sudo apt install --yes gpg wget 
 ```
 
-2. Add the signing key of the kitware cmake repository
+2. Install cmake 3.23.5 by running the script:
 
 ```bash
-wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null
+./install-cmake.sh
 ```
 
-3. Add the repository to apt sources
-
-```bash
-echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ focal main' | sudo tee /etc/apt/sources.list.d/kitware.list >/dev/null
-```
-
-4. Update the apt package database
-
-```bash
-sudo apt update
-```
-
-5. Remove the signing key used to install the repository, as it is no longer needed
-
-```bash
-sudo rm /usr/share/keyrings/kitware-archive-keyring.gpg
-```
-
-6. Install kitware keyring, to ensure you are able to update cmake when future versions are released
-
-```bash
-sudo apt install --yes kitware-archive-keyring
-```
-
-7. Update cmake
-
-```bash
-sudo apt install cmake
-```
-
-8. Verify that you have an updated version, by running the following command
+3. Verify that you have the right version, by running the following command
 
 ```bash
 cmake --version
@@ -82,10 +52,10 @@ cmake --version
 The output of the above command should be something like:
 
 ```
-cmake version 3.23.1
+cmake version 3.23.5
 ```
 
-A version of CMake newer than 3.21 is required to compile the simulator.
+A version of CMake newer than 3.21 and older than 4.0 is required to compile the simulator.
 
 ### Install Qt
 
@@ -265,7 +235,7 @@ sudo apt install --yes python3-pip
 2. Install conan
 
 ```bash
-sudo pip3 install --upgrade conan
+sudo pip3 install conan==1.60.2
 ```
 
 3. Execute the following command to check that conan was installed
@@ -277,7 +247,7 @@ conan --version
 The output of this command should be similar to
 
 ```bash
-Conan version 1.47.0
+Conan version 1.60.2
 ```
 
 ### Add the ProVANT Simulator Environment Variables
