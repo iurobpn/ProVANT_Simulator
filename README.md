@@ -40,6 +40,8 @@ sudo apt install --yes gpg wget
 2. Install cmake 3.23.5 by running the script:
 
 ```bash
+wget https://raw.githubusercontent.com/ProVANT-Project/ProVANT_Simulator/refs/heads/main/install-cmake.sh
+sudo chmod +x install-cmake.sh
 ./install-cmake.sh
 ```
 
