@@ -7,6 +7,13 @@ project(provant_gz_sphere_tests)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+include(FetchContent)
+FetchContent_Declare(
+        spdlog
+        GIT_REPOSITORY https://github.com/gabime/spdlog.git
+        GIT_TAG        v1.16.0 # Or another desired version/tag
+    )
+FetchContent_MakeAvailable(spdlog)
 find_package(
   catkin REQUIRED
   COMPONENTS gazebo_ros
@@ -18,12 +25,7 @@ find_package(
 find_package(gazebo REQUIRED)
 find_package(Boost REQUIRED)
 
-run_conan(conanfile.txt)
-find_package(spdlog REQUIRED)
 find_package(fmt REQUIRED)
-
-add_definitions(${spdlog_libspdlog_DEFINITIONS})
-add_compile_definitions("SPDLOG_FMT_EXTERNAL")
 
 set(PLUGIN_LIBRARIES
     provant_test_apply_force_plugin
@@ -51,7 +53,6 @@ include_directories(
   ${Boost_INCLUDE_DIRS}
   ${catkin_INCLUDE_DIRS}
   ${GAZEBO_INCLUDE_DIRS}
-  ${spdlog_INCLUDE_DIRS}
   ${fmt_INCLUDE_DIRS}
   include
 )
@@ -65,6 +66,7 @@ target_link_libraries(
   ${catkin_LIBRARIES}
   ${GAZEBO_LIBRARIES}
   ${Boost_LIBRARIES}
+  spdlog::spdlog
 )
 
 add_library(provant_test_set_force_once_plugin src/set_force_once/set_force_once.cpp)
@@ -74,6 +76,7 @@ target_link_libraries(
   ${catkin_LIBRARIES}
   ${GAZEBO_LIBRARIES}
   ${Boost_LIBRARIES}
+  spdlog::spdlog
 )
 
 add_library(provant_test_apply_force_plugin src/apply_force_multiple/apply_force_multiple.cpp)
@@ -83,6 +86,7 @@ target_link_libraries(
   ${catkin_LIBRARIES}
   ${GAZEBO_LIBRARIES}
   ${Boost_LIBRARIES}
+  spdlog::spdlog
 )
 
 add_library(provant_test_set_force_plugin src/set_force/set_force.cpp)
@@ -92,6 +96,7 @@ target_link_libraries(
   ${catkin_LIBRARIES}
   ${GAZEBO_LIBRARIES}
   ${Boost_LIBRARIES}
+  spdlog::spdlog
 )
 
 install(

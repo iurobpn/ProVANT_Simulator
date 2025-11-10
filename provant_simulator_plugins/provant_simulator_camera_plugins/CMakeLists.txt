@@ -28,9 +28,15 @@ find_package(
              roscpp
 )
 
+include(FetchContent)
+FetchContent_Declare(
+        spdlog
+        GIT_REPOSITORY https://github.com/gabime/spdlog.git
+        GIT_TAG        v1.16.0 # Or another desired version/tag
+    )
+FetchContent_MakeAvailable(spdlog)
+
 find_package(OpenCV REQUIRED)
-run_conan(conanfile.txt)
-find_package(spdlog REQUIRED)
 find_package(
   Qt5
   COMPONENTS Core Widgets
@@ -60,9 +66,6 @@ catkin_package(
   OpenCV
 )
 
-add_definitions(${spdlog_libspdlog_DEFINITIONS})
-add_compile_definitions("SPDLOG_FMT_EXTERNAL")
-
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
@@ -70,7 +73,6 @@ include_directories(
   ${OpenCV_INCLUDE_DIRS}
   ${Boost_INCLUDE_DIR}
   ${Qt5Core_INCLUDE_DIRS}
-  ${spdlog_INCLUDE_DIRS}
 )
 
 add_library(
@@ -84,7 +86,7 @@ target_link_libraries(
   ${OpenCV_LIBRARIES}
   ${GAZEBO_LIBRARIES}
   ${OGRE_LIBRARIES}
-  ${spdlog_LIBRARIES}
+  spdlog::spdlog
 )
 set_property(TARGET provant_camera_recorder PROPERTY POSITION_INDEPENDENT_CODE ON)
 

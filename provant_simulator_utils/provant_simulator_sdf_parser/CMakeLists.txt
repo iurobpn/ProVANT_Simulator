@@ -3,7 +3,13 @@
 
 cmake_minimum_required(VERSION 3.14)
 project(provant_simulator_sdf_parser)
-
+include(FetchContent)
+FetchContent_Declare(GSL
+    GIT_REPOSITORY "https://github.com/microsoft/GSL"
+    GIT_TAG "v4.2.0"
+    GIT_SHALLOW ON
+)
+FetchContent_MakeAvailable(GSL)
 # Silence warning about unquoted variables in find_boost
 if(POLICY CMP0054)
   cmake_policy(SET CMP0054 NEW)
@@ -16,7 +22,6 @@ find_package(catkin REQUIRED COMPONENTS gazebo_ros provant_simulator_cmake prova
 find_package(gazebo REQUIRED)
 
 # Provide the Microsoft C++ Guidelines Support Library
-run_conan(${CMAKE_CURRENT_SOURCE_DIR}/conan.txt)
 dump_cmake_variables(CONAN)
 
 catkin_package(
@@ -34,12 +39,11 @@ include_directories(
   include
   ${catkin_INCLUDE_DIRS}
   ${GAZEBO_INCLUDE_DIRS}
-  ${CONAN_INCLUDE_DIRS_MS-GSL}
 )
 
 add_library(${PROJECT_NAME} STATIC src/sdf_parser.cpp src/sdf_status.cpp)
 add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} Microsoft.GSL::GSL)
 set_property(TARGET ${PROJECT_NAME} PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 install(
@@ -69,6 +73,7 @@ if(CATKIN_ENABLE_TESTING)
     ${catkin_LIBRARIES}
     ${PROJECT_NAME}
     ${GAZEBO_LIBRARIES}
+    Microsoft.GSL::GSL
   )
   catkin_add_gtest(
     test_sdf_status
@@ -81,5 +86,6 @@ if(CATKIN_ENABLE_TESTING)
     ${catkin_LIBRARIES}
     ${PROJECT_NAME}
     ${GAZEBO_LIBRARIES}
+    Microsoft.GSL::GSL
   )
 endif()

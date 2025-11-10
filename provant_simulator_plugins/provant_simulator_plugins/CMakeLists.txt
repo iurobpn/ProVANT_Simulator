@@ -11,6 +11,13 @@ if(POLICY CMP0054)
   cmake_policy(SET CMP0054 NEW)
 endif()
 
+include(FetchContent)
+FetchContent_Declare(
+        spdlog
+        GIT_REPOSITORY https://github.com/gabime/spdlog.git
+        GIT_TAG        v1.16.0 # Or another desired version/tag
+    )
+FetchContent_MakeAvailable(spdlog)
 find_package(
   catkin REQUIRED
   COMPONENTS gazebo_ros
@@ -28,13 +35,6 @@ find_package(
 find_package(gazebo REQUIRED)
 find_package(Boost REQUIRED)
 
-run_conan(conanfile.txt)
-find_package(spdlog REQUIRED)
-find_package(fmt REQUIRED)
-
-add_definitions(${spdlog_libspdlog_DEFINITIONS})
-add_compile_definitions("SPDLOG_FMT_EXTERNAL")
-
 # Declare the list of plugin libraries that will be built
 set(PLUGIN_LIBRARIES
     provant_config_plugin
@@ -51,7 +51,6 @@ include_directories(
   ${Boost_INCLUDE_DIRS}
   ${catkin_INCLUDE_DIRS}
   ${GAZEBO_INCLUDE_DIRS}
-  ${spdlog_INCLUDE_DIRS}
   ${fmt_INCLUDE_DIRS}
   include
 )
@@ -119,7 +118,7 @@ target_link_libraries(
   provant_position_logger_plugin
   ${catkin_LIBRARIES}
   ${GAZEBO_LIBRARIES}
-  ${spdlog_LIBRARIES}
+  spdlog::spdlog
   ${fmt_LIBRARIES}
 )
 
@@ -132,7 +131,6 @@ target_link_libraries(
   provant_lidar_closest_obj_plugin
   ${catkin_LIBRARIES}
   ${GAZEBO_LIBRARIES}
-  ${spdlog_LIBRARIES}
   ${fmt_LIBRARIES}
   GpuRayPlugin
 )
