@@ -14,6 +14,12 @@ FetchContent_Declare(
         GIT_TAG        v1.16.0 # Or another desired version/tag
     )
 FetchContent_MakeAvailable(spdlog)
+FetchContent_Declare(
+    fmt
+    GIT_REPOSITORY https://github.com/fmtlib/fmt.git
+    GIT_TAG 11.2.0 # Or a more recent version tag
+)
+FetchContent_MakeAvailable(fmt)
 find_package(
   catkin REQUIRED
   COMPONENTS gazebo_ros
@@ -24,8 +30,6 @@ find_package(
 )
 find_package(gazebo REQUIRED)
 find_package(Boost REQUIRED)
-
-find_package(fmt REQUIRED)
 
 set(PLUGIN_LIBRARIES
     provant_test_apply_force_plugin
